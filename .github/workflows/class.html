@@ -1,0 +1,2853 @@
+<!-- =========================================================
+     LIFEYOGA — ABOUT OUR CLASSES (v2: Mobile-first redesign)
+     Drop-in Shopify section. No header / no footer.
+     Focus: filters that feel like filters, sort tabs (Popular/New),
+     and a modal rebuilt as a premium bottom-sheet detail view.
+     ========================================================= -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Instrument+Sans:wght@400;500;600&display=swap"
+  rel="stylesheet"
+/>
+
+<style>
+  /* =============== ROOT + RESET =============== */
+  .ly-classes,
+  .ly-modal,
+  .ly-sticky {
+    --ly-cream: #f5efe3;
+    --ly-cream-light: #fbf7ef;
+    --ly-cream-dark: #ebe1cc;
+    --ly-terracotta: #a63e3e;
+    --ly-terracotta-dark: #7e2f2f;
+    --ly-terracotta-soft: #f3e4e0;
+    --ly-ink: #231810;
+    --ly-ink-soft: #5b4637;
+    --ly-ink-mute: #8a7563;
+    --ly-sand: #d9c9ae;
+    --ly-border: #e3d6c0;
+    --ly-border-soft: #efe7d5;
+    --ly-white: #fffdf8;
+    --ly-dot-empty: #e8d9c0;
+    --ly-green: #5a6b3f;
+
+    --ly-radius: 14px;
+    --ly-radius-sm: 10px;
+    --ly-radius-lg: 20px;
+    --ly-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+    font-family:
+      "Instrument Sans",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    color: var(--ly-ink);
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+  }
+  .ly-classes *,
+  .ly-classes *::before,
+  .ly-classes *::after,
+  .ly-modal *,
+  .ly-sticky * {
+    box-sizing: border-box;
+  }
+
+  .ly-classes {
+    background: var(--ly-cream);
+    padding: 0 0 100px;
+    overflow: hidden;
+    position: relative;
+  }
+  .ly-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ly-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ly-terracotta);
+  }
+
+  /* =============== HERO =============== */
+  .ly-hero {
+    padding: 60px 0 40px;
+  }
+  .ly-hero-inner {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 50px;
+    align-items: end;
+  }
+  .ly-hero h1 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(36px, 6vw, 80px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    margin: 16px 0 0;
+    color: var(--ly-ink);
+  }
+  .ly-hero h1 em {
+    font-style: italic;
+    color: var(--ly-terracotta);
+  }
+  .ly-hero-lead {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ly-ink-soft);
+    max-width: 480px;
+    margin-top: 18px;
+  }
+  .ly-hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+  }
+  .ly-hero-visual {
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: var(--ly-radius);
+    overflow: hidden;
+    background: linear-gradient(135deg, #c9b690, #a6846a);
+  }
+  .ly-hero-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.95);
+  }
+  .ly-hero-stat {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    background: rgba(255, 253, 248, 0.94);
+    backdrop-filter: blur(8px);
+    padding: 12px 16px;
+    border-radius: var(--ly-radius-sm);
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .ly-hero-stat strong {
+    display: block;
+    font-family: "Fraunces", serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ly-terracotta);
+  }
+
+  /* =============== BUTTONS =============== */
+  .ly-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 22px;
+    border-radius: 999px;
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-decoration: none;
+    transition: all 0.25s var(--ly-ease);
+    white-space: nowrap;
+    min-height: 44px;
+  }
+  .ly-btn-primary {
+    background: var(--ly-terracotta);
+    color: var(--ly-white);
+  }
+  .ly-btn-primary:hover {
+    background: var(--ly-terracotta-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px -10px rgba(166, 62, 62, 0.5);
+  }
+  .ly-btn-ghost {
+    background: transparent;
+    color: var(--ly-ink);
+    border-color: var(--ly-ink);
+  }
+  .ly-btn-ghost:hover {
+    background: var(--ly-ink);
+    color: var(--ly-white);
+  }
+  .ly-btn-outline {
+    background: transparent;
+    color: var(--ly-terracotta);
+    border-color: var(--ly-terracotta);
+  }
+  .ly-btn-outline:hover {
+    background: var(--ly-terracotta);
+    color: var(--ly-white);
+  }
+  .ly-btn-arrow {
+    transition: transform 0.3s var(--ly-ease);
+    display: inline-block;
+  }
+  .ly-btn:hover .ly-btn-arrow {
+    transform: translateX(3px);
+  }
+
+  /* =============== TWO PATHS =============== */
+  .ly-paths {
+    padding: 30px 0;
+  }
+  .ly-paths-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .ly-path {
+    position: relative;
+    background: var(--ly-white);
+    border-radius: var(--ly-radius);
+    overflow: hidden;
+    border: 1px solid var(--ly-border);
+    transition: all 0.35s var(--ly-ease);
+    color: inherit;
+    text-decoration: none;
+    display: block;
+  }
+  .ly-path:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 36px -22px rgba(35, 24, 16, 0.25);
+  }
+  .ly-path-media {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+  .ly-path-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s var(--ly-ease);
+  }
+  .ly-path:hover .ly-path-media img {
+    transform: scale(1.04);
+  }
+  .ly-path-body {
+    padding: 24px 26px 26px;
+  }
+  .ly-path-body h3 {
+    font-family: "Fraunces", serif;
+    font-weight: 400;
+    font-size: 28px;
+    letter-spacing: -0.02em;
+    color: var(--ly-terracotta);
+    margin: 0 0 8px;
+  }
+  .ly-path-body p {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ly-ink-soft);
+    margin: 0 0 18px;
+  }
+  .ly-path-meta {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 14px;
+    font-size: 11px;
+    color: var(--ly-ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .ly-path-meta span::before {
+    content: "◆";
+    color: var(--ly-terracotta);
+    margin-right: 6px;
+    font-size: 7px;
+    vertical-align: middle;
+  }
+
+  /* =============== SECTION HEAD =============== */
+  .ly-section-head {
+    padding: 60px 0 20px;
+    border-top: 1px solid var(--ly-border);
+    margin-top: 30px;
+  }
+  .ly-section-head .ly-eyebrow {
+    display: block;
+    margin-bottom: 12px;
+  }
+  .ly-section-head h2 {
+    font-family: "Fraunces", serif;
+    font-weight: 400;
+    font-size: clamp(28px, 4vw, 48px);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin: 0 0 8px;
+    max-width: 720px;
+  }
+  .ly-section-head h2 em {
+    font-style: italic;
+    color: var(--ly-terracotta);
+  }
+  .ly-section-head > p {
+    margin: 6px 0 0;
+    color: var(--ly-ink-soft);
+    font-size: 15px;
+    max-width: 580px;
+  }
+
+  /* =============== SORT TABS =============== */
+  .ly-tabs {
+    display: flex;
+    gap: 2px;
+    margin: 26px 0 0;
+    padding: 4px;
+    background: var(--ly-cream-dark);
+    border-radius: 999px;
+    width: fit-content;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .ly-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .ly-tab {
+    border: 0;
+    background: transparent;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ly-ink-soft);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.25s var(--ly-ease);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+  }
+  .ly-tab:hover {
+    color: var(--ly-ink);
+  }
+  .ly-tab.is-active {
+    background: var(--ly-ink);
+    color: var(--ly-white);
+    box-shadow: 0 4px 10px -4px rgba(35, 24, 16, 0.3);
+  }
+  .ly-tab-badge {
+    background: var(--ly-terracotta);
+    color: var(--ly-white);
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .ly-tab.is-active .ly-tab-badge {
+    background: var(--ly-cream-light);
+    color: var(--ly-ink);
+  }
+
+  /* =============== FILTER BAR =============== */
+  .ly-filterbar {
+    margin: 20px 0 8px;
+    background: var(--ly-white);
+    border: 1px solid var(--ly-border);
+    border-radius: var(--ly-radius);
+    overflow: hidden;
+  }
+  .ly-filter-group {
+    display: grid;
+    grid-template-columns: 140px 1fr auto;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--ly-border-soft);
+  }
+  .ly-filter-group:last-child {
+    border-bottom: 0;
+  }
+  .ly-filter-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ly-ink-mute);
+    font-weight: 500;
+  }
+  .ly-filter-head svg {
+    color: var(--ly-terracotta);
+    flex-shrink: 0;
+  }
+  .ly-chips {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 2px 0;
+  }
+  .ly-chips::-webkit-scrollbar {
+    display: none;
+  }
+  .ly-chip {
+    border: 1px solid var(--ly-border);
+    background: var(--ly-cream-light);
+    color: var(--ly-ink-soft);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s var(--ly-ease);
+    white-space: nowrap;
+    font-family: inherit;
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .ly-chip:hover {
+    border-color: var(--ly-ink);
+    color: var(--ly-ink);
+  }
+  .ly-chip.is-active {
+    background: var(--ly-ink);
+    color: var(--ly-white);
+    border-color: var(--ly-ink);
+  }
+  .ly-chip-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--ly-terracotta);
+    border-radius: 999px;
+  }
+  .ly-filter-clear {
+    background: transparent;
+    border: 0;
+    color: var(--ly-ink-mute);
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 6px 8px;
+    white-space: nowrap;
+  }
+  .ly-filter-clear:hover {
+    color: var(--ly-terracotta);
+  }
+  .ly-filter-clear[disabled] {
+    opacity: 0.4;
+    cursor: default;
+  }
+  .ly-filter-count {
+    padding: 12px 18px;
+    font-size: 13px;
+    color: var(--ly-ink-mute);
+    background: var(--ly-cream-light);
+    border-top: 1px solid var(--ly-border-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .ly-filter-count strong {
+    color: var(--ly-ink);
+    font-weight: 600;
+  }
+
+  /* =============== CLASS GRID =============== */
+  .ly-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px 20px;
+    padding: 20px 0;
+  }
+  .ly-card {
+    background: var(--ly-white);
+    border: 1px solid var(--ly-border);
+    border-radius: var(--ly-radius);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.35s var(--ly-ease);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    font-family: inherit;
+    text-align: left;
+    padding: 0;
+    color: inherit;
+    width: 100%;
+  }
+  .ly-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--ly-ink);
+    box-shadow: 0 22px 38px -24px rgba(35, 24, 16, 0.3);
+  }
+  .ly-card:active {
+    transform: translateY(-1px);
+  }
+  .ly-card-media {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    position: relative;
+    background: var(--ly-cream-dark);
+  }
+  .ly-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s var(--ly-ease);
+  }
+  .ly-card:hover .ly-card-media img {
+    transform: scale(1.05);
+  }
+
+  .ly-card-badges {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .ly-badge {
+    background: rgba(255, 253, 248, 0.95);
+    backdrop-filter: blur(6px);
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ly-ink);
+  }
+  .ly-badge-new {
+    background: var(--ly-terracotta);
+    color: var(--ly-white);
+  }
+  .ly-badge-popular {
+    background: var(--ly-ink);
+    color: var(--ly-white);
+  }
+  .ly-badge-members {
+    background: var(--ly-green);
+    color: var(--ly-white);
+    margin-left: auto;
+  }
+
+  .ly-card-body {
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+  .ly-card-body h3 {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin: 0;
+    color: var(--ly-ink);
+  }
+  .ly-card-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    font-size: 11.5px;
+    color: var(--ly-ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .ly-dots {
+    display: inline-flex;
+    gap: 3px;
+  }
+  .ly-dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--ly-dot-empty);
+  }
+  .ly-dots span.is-on {
+    background: var(--ly-terracotta);
+  }
+  .ly-card-desc {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--ly-ink-soft);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .ly-card-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--ly-border-soft);
+    gap: 10px;
+  }
+  .ly-card-link {
+    color: var(--ly-terracotta);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: gap 0.25s var(--ly-ease);
+  }
+  .ly-card:hover .ly-card-link {
+    gap: 8px;
+  }
+  .ly-card-next {
+    font-size: 10.5px;
+    color: var(--ly-ink-mute);
+    text-align: right;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .ly-card-next strong {
+    color: var(--ly-ink);
+    font-weight: 600;
+    display: block;
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    margin-top: 1px;
+  }
+
+  .ly-no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--ly-ink-mute);
+  }
+  .ly-no-results h4 {
+    font-family: "Fraunces", serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--ly-ink);
+    margin: 0 0 8px;
+  }
+
+  /* =============== TRUST STRIP =============== */
+  .ly-trust {
+    margin-top: 70px;
+    background: var(--ly-white);
+    border-radius: var(--ly-radius);
+    border: 1px solid var(--ly-border);
+    padding: 50px 44px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 50px;
+    align-items: center;
+  }
+  .ly-trust h2 {
+    font-family: "Fraunces", serif;
+    font-weight: 400;
+    font-size: clamp(24px, 3vw, 38px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin: 10px 0 16px;
+  }
+  .ly-trust p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ly-ink-soft);
+    margin: 0 0 22px;
+  }
+  .ly-trust-cta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .ly-trust-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 24px;
+    padding-left: 30px;
+    border-left: 1px solid var(--ly-border);
+  }
+  .ly-trust-stat strong {
+    display: block;
+    font-family: "Fraunces", serif;
+    font-size: 34px;
+    font-weight: 500;
+    color: var(--ly-terracotta);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .ly-trust-stat span {
+    font-size: 12.5px;
+    color: var(--ly-ink-soft);
+    margin-top: 6px;
+    display: block;
+    line-height: 1.4;
+  }
+
+  /* =============== FAQ =============== */
+  .ly-faq {
+    margin-top: 70px;
+    padding: 50px 0 20px;
+  }
+  .ly-faq-grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 50px;
+    align-items: start;
+  }
+  .ly-faq-grid h2 {
+    font-family: "Fraunces", serif;
+    font-weight: 400;
+    font-size: clamp(28px, 3.4vw, 42px);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin: 10px 0 16px;
+  }
+  .ly-faq-grid > div > p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ly-ink-soft);
+    margin: 0 0 20px;
+  }
+  .ly-faq-items {
+    border-top: 1px solid var(--ly-border);
+  }
+  .ly-faq-item {
+    border-bottom: 1px solid var(--ly-border);
+  }
+  .ly-faq-q {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: 0;
+    padding: 20px 0;
+    font-family: "Fraunces", serif;
+    font-size: 17.5px;
+    font-weight: 400;
+    color: var(--ly-ink);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    letter-spacing: -0.005em;
+  }
+  .ly-faq-q svg {
+    flex-shrink: 0;
+    transition: transform 0.3s var(--ly-ease);
+    color: var(--ly-terracotta);
+  }
+  .ly-faq-item.is-open .ly-faq-q svg {
+    transform: rotate(45deg);
+  }
+  .ly-faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s var(--ly-ease);
+  }
+  .ly-faq-a-inner {
+    padding: 0 0 22px;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ly-ink-soft);
+    max-width: 620px;
+  }
+  .ly-faq-item.is-open .ly-faq-a {
+    max-height: 400px;
+  }
+
+  /* =============== FINAL CTA =============== */
+  .ly-final {
+    margin-top: 80px;
+    background: var(--ly-ink);
+    border-radius: var(--ly-radius);
+    padding: 70px 50px;
+    text-align: center;
+    color: var(--ly-cream-light);
+    position: relative;
+    overflow: hidden;
+  }
+  .ly-final::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(
+        circle at 20% 30%,
+        rgba(166, 62, 62, 0.22),
+        transparent 55%
+      ),
+      radial-gradient(
+        circle at 80% 70%,
+        rgba(217, 201, 174, 0.12),
+        transparent 55%
+      );
+  }
+  .ly-final > * {
+    position: relative;
+  }
+  .ly-final .ly-eyebrow {
+    color: var(--ly-sand);
+  }
+  .ly-final h2 {
+    font-family: "Fraunces", serif;
+    font-weight: 300;
+    font-size: clamp(32px, 5vw, 58px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 14px auto 20px;
+    max-width: 18ch;
+    color: var(--ly-cream-light);
+  }
+  .ly-final h2 em {
+    font-style: italic;
+    color: var(--ly-sand);
+    font-weight: 300;
+  }
+  .ly-final p {
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0 auto 28px;
+    color: rgba(245, 239, 227, 0.75);
+  }
+  .ly-final-ctas {
+    display: inline-flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .ly-final .ly-btn-ghost {
+    color: var(--ly-cream-light);
+    border-color: rgba(245, 239, 227, 0.4);
+  }
+  .ly-final .ly-btn-ghost:hover {
+    background: var(--ly-cream-light);
+    color: var(--ly-ink);
+  }
+
+  /* =========================================================
+   MODAL — Mobile-first bottom sheet, desktop centered card
+   ========================================================= */
+  .ly-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    background: rgba(35, 24, 16, 0.55);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.3s var(--ly-ease);
+    font-family: "Instrument Sans", sans-serif;
+  }
+  .ly-modal.is-open {
+    display: block;
+    opacity: 1;
+  }
+
+  .ly-modal-panel {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.98);
+    opacity: 0;
+    width: 100%;
+    max-width: 980px;
+    max-height: 92vh;
+    background: var(--ly-cream-light);
+    border-radius: var(--ly-radius-lg);
+    overflow: hidden;
+    box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.45);
+    transition:
+      transform 0.45s var(--ly-ease),
+      opacity 0.3s var(--ly-ease);
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+  }
+  .ly-modal.is-open .ly-modal-panel {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  .ly-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 0;
+    background: rgba(255, 253, 248, 0.95);
+    backdrop-filter: blur(8px);
+    color: var(--ly-ink);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.2s var(--ly-ease);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  .ly-modal-close:hover {
+    background: var(--ly-ink);
+    color: var(--ly-white);
+  }
+
+  /* ----- MEDIA (left on desktop, top on mobile) ----- */
+  .ly-modal-media {
+    position: relative;
+    background: var(--ly-sand);
+    min-height: 100%;
+  }
+  .ly-modal-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .ly-modal-media-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(35, 24, 16, 0) 40%,
+      rgba(35, 24, 16, 0.7) 100%
+    );
+  }
+  .ly-modal-media-overlay {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    color: var(--ly-white);
+  }
+  .ly-modal-media-overlay .ly-eyebrow {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+  }
+  .ly-modal-media-overlay h2 {
+    font-family: "Fraunces", serif;
+    font-weight: 400;
+    font-size: clamp(28px, 3.4vw, 38px);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin: 8px 0 0;
+    color: var(--ly-white);
+  }
+
+  .ly-modal-badges {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  /* ----- BODY (right on desktop, bottom on mobile) ----- */
+  .ly-modal-body {
+    overflow-y: auto;
+    padding: 32px 36px 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    position: relative;
+  }
+  .ly-modal-body::-webkit-scrollbar {
+    width: 6px;
+  }
+  .ly-modal-body::-webkit-scrollbar-thumb {
+    background: var(--ly-border);
+    border-radius: 99px;
+  }
+
+  .ly-modal-tagline {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.3;
+    color: var(--ly-terracotta);
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+
+  /* "At a glance" — visual decision helper */
+  .ly-glance {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--ly-border-soft);
+    border-radius: var(--ly-radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--ly-border-soft);
+  }
+  .ly-glance-cell {
+    background: var(--ly-white);
+    padding: 14px 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+  }
+  .ly-glance-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    background: var(--ly-terracotta-soft);
+    color: var(--ly-terracotta);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2px;
+  }
+  .ly-glance-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ly-ink-mute);
+    font-weight: 500;
+  }
+  .ly-glance-value {
+    font-size: 13.5px;
+    color: var(--ly-ink);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .ly-modal-copy {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--ly-ink-soft);
+  }
+  .ly-modal-copy p {
+    margin: 0 0 10px;
+  }
+  .ly-modal-copy p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Info cards */
+  .ly-info-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .ly-info-card {
+    background: var(--ly-white);
+    border: 1px solid var(--ly-border);
+    border-radius: var(--ly-radius-sm);
+    padding: 16px 18px;
+  }
+  .ly-info-card-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .ly-info-card-head svg {
+    color: var(--ly-terracotta);
+    flex-shrink: 0;
+  }
+  .ly-info-card-head strong {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ly-terracotta);
+    font-weight: 600;
+  }
+  .ly-info-card p {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ly-ink-soft);
+    margin: 0;
+  }
+
+  /* Upcoming sessions */
+  .ly-sessions-card {
+    background: var(--ly-cream-dark);
+    border-radius: var(--ly-radius-sm);
+    padding: 16px 18px;
+  }
+  .ly-sessions-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+  }
+  .ly-sessions-head strong {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ly-terracotta);
+    font-weight: 600;
+  }
+  .ly-sessions-head a {
+    color: var(--ly-ink-mute);
+    font-size: 11px;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+  .ly-sessions-head a:hover {
+    color: var(--ly-terracotta);
+  }
+  .ly-session {
+    display: grid;
+    grid-template-columns: 74px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px dashed rgba(35, 24, 16, 0.1);
+  }
+  .ly-session:first-of-type {
+    border-top: 0;
+  }
+  .ly-session time {
+    font-family: "Fraunces", serif;
+    font-size: 15px;
+    color: var(--ly-ink);
+    font-weight: 500;
+    line-height: 1.1;
+  }
+  .ly-session time span {
+    display: block;
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ly-ink-mute);
+    margin-top: 2px;
+  }
+  .ly-session-teacher {
+    color: var(--ly-ink-soft);
+    font-size: 13px;
+  }
+  .ly-session-teacher strong {
+    color: var(--ly-ink);
+    font-weight: 500;
+  }
+  .ly-session-book {
+    background: var(--ly-ink);
+    color: var(--ly-white);
+    border: 0;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s var(--ly-ease);
+    font-family: inherit;
+    letter-spacing: 0.02em;
+  }
+  .ly-session-book:hover {
+    background: var(--ly-terracotta);
+  }
+
+  .ly-members-note {
+    background: var(--ly-terracotta-soft);
+    border-left: 3px solid var(--ly-terracotta);
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ly-ink);
+  }
+  .ly-members-note strong {
+    color: var(--ly-terracotta);
+  }
+
+  /* Modal footer CTA bar — sticky */
+  .ly-modal-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 253, 248, 0.96);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--ly-border);
+    padding: 14px 28px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    z-index: 5;
+  }
+  .ly-modal-footer .ly-btn {
+    flex: 1;
+    min-height: 50px;
+    font-size: 14.5px;
+  }
+  .ly-modal-footer-info {
+    font-size: 12px;
+    color: var(--ly-ink-mute);
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+  .ly-modal-footer-info strong {
+    display: block;
+    color: var(--ly-ink);
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 1px;
+  }
+
+  /* For members-only classes, the footer has only one button */
+  .ly-modal-footer[data-single="true"] .ly-btn {
+    flex: 1;
+  }
+
+  /* =============== STICKY MOBILE BOOK BAR =============== */
+  .ly-sticky {
+    position: fixed;
+    bottom: 14px;
+    left: 14px;
+    right: 14px;
+    z-index: 9997;
+    display: none;
+    gap: 8px;
+    padding: 8px;
+    background: var(--ly-ink);
+    border-radius: 999px;
+    box-shadow: 0 14px 32px -10px rgba(0, 0, 0, 0.5);
+  }
+  .ly-sticky .ly-btn {
+    flex: 1;
+    padding: 12px 16px;
+    font-size: 13px;
+    min-height: 44px;
+  }
+  .ly-sticky .ly-btn-primary {
+    background: var(--ly-terracotta);
+  }
+  .ly-sticky .ly-btn-ghost {
+    background: transparent;
+    color: var(--ly-cream-light);
+    border-color: rgba(245, 239, 227, 0.25);
+  }
+  .ly-sticky .ly-btn-ghost:hover {
+    background: rgba(245, 239, 227, 0.1);
+    color: var(--ly-cream-light);
+  }
+
+  body.ly-modal-open {
+    overflow: hidden;
+  }
+
+  /* =========================================================
+   RESPONSIVE — mobile-first refinements
+   ========================================================= */
+  @media (max-width: 960px) {
+    .ly-hero {
+      padding: 40px 0 20px;
+    }
+    .ly-hero-inner {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .ly-hero-visual {
+      aspect-ratio: 4/3;
+      max-height: 360px;
+    }
+    .ly-paths-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .ly-section-head {
+      padding: 46px 0 16px;
+    }
+    .ly-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px 14px;
+    }
+    .ly-trust {
+      grid-template-columns: 1fr;
+      padding: 36px 26px;
+      gap: 28px;
+    }
+    .ly-trust-stats {
+      padding-left: 0;
+      border-left: 0;
+      border-top: 1px solid var(--ly-border);
+      padding-top: 26px;
+    }
+    .ly-faq-grid {
+      grid-template-columns: 1fr;
+      gap: 26px;
+    }
+    .ly-final {
+      padding: 56px 28px;
+      margin-top: 60px;
+    }
+    .ly-filter-group {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 14px 14px;
+    }
+    .ly-filter-head {
+      font-size: 11px;
+    }
+
+    /* Modal = full-screen bottom sheet on tablet/mobile */
+    .ly-modal-panel {
+      grid-template-columns: 1fr;
+      max-width: 540px;
+      max-height: 94vh;
+      top: auto;
+      left: 50%;
+      bottom: 0;
+      transform: translate(-50%, 100%);
+      border-radius: var(--ly-radius-lg) var(--ly-radius-lg) 0 0;
+    }
+    .ly-modal.is-open .ly-modal-panel {
+      transform: translate(-50%, 0);
+    }
+    .ly-modal-media {
+      aspect-ratio: 16/11;
+      min-height: 0;
+    }
+    .ly-modal-media-overlay {
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+    }
+    .ly-modal-body {
+      padding: 22px 22px 110px;
+      gap: 18px;
+    }
+    .ly-modal-footer {
+      padding: 12px 18px calc(12px + env(safe-area-inset-bottom));
+    }
+  }
+
+  @media (max-width: 620px) {
+    .ly-classes {
+      padding-bottom: 130px;
+    }
+    .ly-container {
+      padding: 0 16px;
+    }
+    .ly-hero {
+      padding: 32px 0 14px;
+    }
+    .ly-hero h1 {
+      font-size: 44px;
+    }
+    .ly-hero-lead {
+      font-size: 15px;
+    }
+    .ly-paths {
+      padding: 20px 0;
+    }
+    .ly-path-body {
+      padding: 20px 22px 22px;
+    }
+    .ly-path-body h3 {
+      font-size: 24px;
+    }
+    .ly-section-head {
+      padding: 40px 0 12px;
+    }
+    .ly-tabs {
+      margin-top: 18px;
+      width: 100%;
+    }
+    .ly-tab {
+      padding: 9px 14px;
+      font-size: 12.5px;
+    }
+    .ly-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .ly-card-media {
+      aspect-ratio: 5/3;
+    }
+    .ly-card-body {
+      padding: 16px 18px 18px;
+    }
+    .ly-card-body h3 {
+      font-size: 19px;
+    }
+    .ly-card-desc {
+      font-size: 13px;
+    }
+    .ly-sticky {
+      display: flex;
+    }
+
+    /* Modal mobile polish */
+    .ly-modal-media {
+      aspect-ratio: 16/12;
+    }
+    .ly-modal-media-overlay h2 {
+      font-size: 28px;
+    }
+    .ly-modal-body {
+      padding: 20px 18px 110px;
+      gap: 16px;
+    }
+    .ly-modal-tagline {
+      font-size: 17px;
+    }
+    .ly-info-cards {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .ly-session {
+      grid-template-columns: 64px 1fr auto;
+      gap: 10px;
+    }
+    .ly-session time {
+      font-size: 14px;
+    }
+    .ly-session-teacher {
+      font-size: 12.5px;
+    }
+    .ly-modal-footer {
+      padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    }
+    .ly-modal-footer .ly-btn {
+      min-height: 48px;
+      font-size: 14px;
+    }
+    .ly-trust {
+      padding: 30px 20px;
+    }
+    .ly-trust-stats {
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .ly-trust-stat strong {
+      font-size: 30px;
+    }
+    .ly-final {
+      padding: 44px 22px;
+    }
+    .ly-final-ctas {
+      flex-direction: column;
+      width: 100%;
+    }
+    .ly-final-ctas .ly-btn {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .ly-hero h1 {
+      font-size: 38px;
+    }
+    .ly-glance {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .ly-glance-cell {
+      padding: 12px 6px;
+    }
+    .ly-glance-value {
+      font-size: 12.5px;
+    }
+    .ly-modal-footer-info {
+      display: none;
+    }
+  }
+</style>
+
+<!-- ========== MAIN SECTION ========== -->
+<section class="ly-classes">
+  <!-- HERO -->
+  <div class="ly-hero">
+    <div class="ly-container">
+      <div class="ly-hero-inner">
+        <div>
+          <span class="ly-eyebrow">Classes at Lifeyoga</span>
+          <h1>Find the <em>practice</em><br />that finds you.</h1>
+          <p class="ly-hero-lead">
+            Thirty-plus classes across three intensities, led by teachers who
+            know that yoga looks different for every body. Novice or veteran —
+            we'll help you land on the one that fits today.
+          </p>
+          <div class="ly-hero-ctas">
+            <a href="/pages/book-now" class="ly-btn ly-btn-primary">
+              Book a free trial <span class="ly-btn-arrow">→</span>
+            </a>
+            <a href="#ly-grid" class="ly-btn ly-btn-ghost">Browse classes</a>
+          </div>
+        </div>
+        <div class="ly-hero-visual">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Vinyasa_96eab5c0-c7fa-43bc-bd4f-d4581eb189c0.jpg?v=1770025659"
+            alt="Lifeyoga practice"
+          />
+          <div class="ly-hero-stat">
+            7 days a week<br />
+            <strong>6 AM – 10 PM</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TWO PATHS -->
+  <div class="ly-container">
+    <div class="ly-paths">
+      <div class="ly-paths-grid">
+        <a href="/pages/memberships" class="ly-path">
+          <div class="ly-path-media">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Hatha_Basic_f0b57e6e-9e81-4886-beda-24f98e1da30b.jpg?v=1769686456"
+              alt="Group classes"
+              loading="lazy"
+            />
+          </div>
+          <div class="ly-path-body">
+            <div class="ly-path-meta">
+              <span>Studio practice</span>
+              <span>All levels</span>
+            </div>
+            <h3>Group classes</h3>
+            <p>
+              Practice in community — we believe group energy empowers, heals,
+              and grows something a solo practice can't reach.
+            </p>
+            <span class="ly-btn ly-btn-outline"
+              >Buy a membership <span class="ly-btn-arrow">→</span></span
+            >
+          </div>
+        </a>
+        <a href="/pages/private-classes" class="ly-path">
+          <div class="ly-path-media">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Iyengar-style.jpg?v=1769686455"
+              alt="Private classes"
+              loading="lazy"
+            />
+          </div>
+          <div class="ly-path-body">
+            <div class="ly-path-meta">
+              <span>1-on-1</span>
+              <span>Tailored</span>
+            </div>
+            <h3>Private classes</h3>
+            <p>
+              Therapy-based, in smaller studios. To address imbalances, or to
+              take a particular asana deeper.
+            </p>
+            <span class="ly-btn ly-btn-outline"
+              >Book a session <span class="ly-btn-arrow">→</span></span
+            >
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BROWSE SECTION -->
+  <div class="ly-container">
+    <div class="ly-section-head" id="ly-grid">
+      <span class="ly-eyebrow">Explore the programming</span>
+      <h2>Browse by how you <em>want to feel</em>.</h2>
+      <p>
+        Use the tabs to jump to what's trending, and the filters to narrow down
+        by goal or intensity.
+      </p>
+
+      <!-- Sort tabs -->
+      <div class="ly-tabs" id="lyTabs">
+        <button class="ly-tab is-active" data-sort="all">All classes</button>
+        <button class="ly-tab" data-sort="popular">
+          Popular <span class="ly-tab-badge">Hot</span>
+        </button>
+        <button class="ly-tab" data-sort="new">
+          New <span class="ly-tab-badge">Just in</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Filter bar -->
+    <div class="ly-filterbar">
+      <div class="ly-filter-group">
+        <div class="ly-filter-head">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 2a15 15 0 0 1 0 20" />
+            <path d="M2 12h20" />
+          </svg>
+          Your goal
+        </div>
+        <div class="ly-chips" id="lyGoals">
+          <button class="ly-chip is-active" data-goal="all">All</button>
+          <button class="ly-chip" data-goal="beginner">🌱 New to yoga</button>
+          <button class="ly-chip" data-goal="stress">☁️ Stress relief</button>
+          <button class="ly-chip" data-goal="strength">
+            💪 Build strength
+          </button>
+          <button class="ly-chip" data-goal="flexibility">
+            🧘 Flexibility
+          </button>
+          <button class="ly-chip" data-goal="cardio">🔥 Cardio & tone</button>
+          <button class="ly-chip" data-goal="specialised">
+            ✨ Specialised
+          </button>
+        </div>
+        <button class="ly-filter-clear" id="lyClearGoal" disabled>Clear</button>
+      </div>
+      <div class="ly-filter-group">
+        <div class="ly-filter-head">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M3 17l6-6 4 4 7-7" />
+            <path d="M14 8h7v7" />
+          </svg>
+          Intensity
+        </div>
+        <div class="ly-chips" id="lyLevels">
+          <button class="ly-chip is-active" data-level="all">Any level</button>
+          <button class="ly-chip" data-level="simple">
+            <span class="ly-chip-dot"></span>Simple
+          </button>
+          <button class="ly-chip" data-level="moderate">
+            <span class="ly-chip-dot"></span
+            ><span class="ly-chip-dot"></span>Moderate
+          </button>
+          <button class="ly-chip" data-level="challenging">
+            <span class="ly-chip-dot"></span><span class="ly-chip-dot"></span
+            ><span class="ly-chip-dot"></span>Challenging
+          </button>
+        </div>
+        <button class="ly-filter-clear" id="lyClearLevel" disabled>
+          Clear
+        </button>
+      </div>
+      <div class="ly-filter-count">
+        <span id="lyCount"></span>
+        <button class="ly-filter-clear" id="lyResetAll" disabled>
+          Reset all filters
+        </button>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="ly-grid" id="lyGrid"></div>
+  </div>
+
+  <!-- TRUST STRIP -->
+  <div class="ly-container">
+    <div class="ly-trust">
+      <div>
+        <span class="ly-eyebrow">Why start with a membership</span>
+        <h2>Commit once. Practice as much as your life allows.</h2>
+        <p>
+          Members get every class on this page — from 6 AM Hatha to a
+          late-evening Yin reset — plus priority booking and members-only
+          classes like Aerial Yoga.
+        </p>
+        <div class="ly-trust-cta">
+          <a href="/pages/memberships" class="ly-btn ly-btn-primary">
+            See plans <span class="ly-btn-arrow">→</span>
+          </a>
+          <a href="/pages/book-now" class="ly-btn ly-btn-ghost"
+            >Try a free class</a
+          >
+        </div>
+      </div>
+      <div class="ly-trust-stats">
+        <div class="ly-trust-stat">
+          <strong>28+</strong><span>Class styles across 3 intensities</span>
+        </div>
+        <div class="ly-trust-stat">
+          <strong>7</strong><span>Days a week, 6 AM to 10 PM</span>
+        </div>
+        <div class="ly-trust-stat">
+          <strong>60–90</strong><span>Minute classes to fit your schedule</span>
+        </div>
+        <div class="ly-trust-stat">
+          <strong>15+</strong><span>Certified teachers, unique lenses</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="ly-container">
+    <div class="ly-faq">
+      <div class="ly-faq-grid">
+        <div>
+          <span class="ly-eyebrow">Before you book</span>
+          <h2>A few things worth knowing.</h2>
+          <p>
+            Still have questions? Our team is on WhatsApp and happy to walk you
+            through anything — from which class fits a new injury to whether
+            your pregnancy is at a good stage for Prenatal.
+          </p>
+          <a href="#" class="ly-btn ly-btn-outline"
+            >Chat on WhatsApp <span class="ly-btn-arrow">→</span></a
+          >
+        </div>
+        <div class="ly-faq-items">
+          <div class="ly-faq-item">
+            <button class="ly-faq-q">
+              Do I need prior yoga experience?
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </button>
+            <div class="ly-faq-a">
+              <div class="ly-faq-a-inner">
+                Not at all. Our Simple-intensity classes — Hatha Basic, Vinyasa
+                Basic, Warm Stretch, Yog Nidra — are designed for first-timers.
+                Your teacher will modify postures to your level. Start there and
+                move up as your body's ready.
+              </div>
+            </div>
+          </div>
+          <div class="ly-faq-item">
+            <button class="ly-faq-q">
+              What should I bring?
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </button>
+            <div class="ly-faq-a">
+              <div class="ly-faq-a-inner">
+                Comfortable clothes you can move in, a water bottle, and
+                yourself. Mats, blocks, straps, wall-ropes, and silks are all
+                provided. For hot classes, a small towel helps.
+              </div>
+            </div>
+          </div>
+          <div class="ly-faq-item">
+            <button class="ly-faq-q">
+              How do I choose between classes?
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </button>
+            <div class="ly-faq-a">
+              <div class="ly-faq-a-inner">
+                Start by filtering above — by goal (what you want) or intensity
+                (how hard you want to work). If you're unsure, try Yoga Relay:
+                90 minutes spanning multiple styles and teachers. It's the
+                fastest way to figure out what clicks for your body.
+              </div>
+            </div>
+          </div>
+          <div class="ly-faq-item">
+            <button class="ly-faq-q">
+              I'm pregnant / injured / over 60. Is there a class for me?
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </button>
+            <div class="ly-faq-a">
+              <div class="ly-faq-a-inner">
+                Yes — several. Prenatal is designed for every trimester. Yoga
+                Reset is built around recovery and mobility. Iyengar-style uses
+                props to meet you where your body is. Message us and we'll
+                recommend the right fit.
+              </div>
+            </div>
+          </div>
+          <div class="ly-faq-item">
+            <button class="ly-faq-q">
+              Can I cancel or reschedule a booking?
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </button>
+            <div class="ly-faq-a">
+              <div class="ly-faq-a-inner">
+                Yes, up to 4 hours before class start. You can manage all
+                bookings through the Lifeyoga app on iOS and Google Play.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="ly-container">
+    <div class="ly-final">
+      <span class="ly-eyebrow">Start where you are</span>
+      <h2>Your first class is on <em>us</em>.</h2>
+      <p>
+        Show up once, try one class, see if the studio feels like yours. No
+        commitment, no pressure — just a mat, a teacher, and 60 minutes of you.
+      </p>
+      <div class="ly-final-ctas">
+        <a href="/pages/book-now" class="ly-btn ly-btn-primary"
+          >Book your free trial <span class="ly-btn-arrow">→</span></a
+        >
+        <a href="/pages/daily-schedule" class="ly-btn ly-btn-ghost"
+          >This week's schedule</a
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MODAL ========== -->
+<div class="ly-modal" id="lyModal" aria-hidden="true" role="dialog">
+  <div class="ly-modal-panel">
+    <button class="ly-modal-close" id="lyModalClose" aria-label="Close">
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+      >
+        <path d="M18 6L6 18M6 6l12 12" />
+      </svg>
+    </button>
+
+    <div class="ly-modal-media">
+      <img id="lyMImg" src="" alt="" />
+      <div class="ly-modal-badges" id="lyMBadges"></div>
+      <div class="ly-modal-media-gradient"></div>
+      <div class="ly-modal-media-overlay">
+        <span class="ly-eyebrow" id="lyMEyebrow">Class</span>
+        <h2 id="lyMTitle"></h2>
+      </div>
+    </div>
+
+    <div class="ly-modal-body">
+      <p class="ly-modal-tagline" id="lyMTagline"></p>
+
+      <!-- At a glance -->
+      <div class="ly-glance" id="lyMGlance"></div>
+
+      <!-- Description -->
+      <div class="ly-modal-copy" id="lyMCopy"></div>
+
+      <!-- Info cards -->
+      <div class="ly-info-cards">
+        <div class="ly-info-card">
+          <div class="ly-info-card-head">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <strong>It's for</strong>
+          </div>
+          <p id="lyMFor"></p>
+        </div>
+        <div class="ly-info-card">
+          <div class="ly-info-card-head">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+              />
+            </svg>
+            <strong>Benefits</strong>
+          </div>
+          <p id="lyMBenefits"></p>
+        </div>
+      </div>
+
+      <!-- Members-only banner (conditional) -->
+      <div id="lyMMembers"></div>
+
+      <!-- Upcoming sessions -->
+      <div class="ly-sessions-card" id="lyMSessions"></div>
+    </div>
+
+    <!-- Sticky footer -->
+    <div class="ly-modal-footer" id="lyMFooter"></div>
+  </div>
+</div>
+
+<!-- ========== STICKY MOBILE BAR ========== -->
+<div class="ly-sticky">
+  <a href="/pages/book-now" class="ly-btn ly-btn-primary">Free trial</a>
+  <a href="/pages/daily-schedule" class="ly-btn ly-btn-ghost">Schedule</a>
+  <a href="/pages/memberships" class="ly-btn ly-btn-ghost">Plans</a>
+</div>
+
+<!-- ========== SCRIPT ========== -->
+<script>
+  (function () {
+    // =========================================================
+    // CLASS DATA
+    // Flags: isNew, isPopular, members
+    // =========================================================
+    var classes = [
+      // ---------- NEW ----------
+      {
+        id: "warm-flow",
+        name: "Warm Flow",
+        isNew: true,
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/new_warm_flow.jpg?v=1775024580",
+        levels: ["moderate"],
+        emphasis: "Movement",
+        duration: 60,
+        temp: "32°C",
+        goals: ["cardio", "flexibility"],
+        tagline: "Step into 32°C. Let movement become meditation.",
+        glance: {
+          pace: "Flowing",
+          heat: "Warm (32°C)",
+          forWho: "Intermediate",
+        },
+        desc: "Our warm flow uses gentle, therapeutic heat to deepen the connection between body, breath, and awareness. Elevated temperature allows muscles to open safely. Through continuous, breath-led sequences, you'll engage major muscle groups, build endurance, and experience the satisfaction of a full-body workout.",
+        forWho:
+          "Regular practitioners and those newer to practice, especially if you enjoy Vinyasa-style flow.",
+        benefits:
+          "Increased circulation, deeper range of motion, detox through sweat, improved cardiovascular health.",
+      },
+      {
+        id: "yoga-reset",
+        name: "Yoga Reset",
+        isNew: true,
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Gentle_Yoga.jpg?v=1769686456",
+        levels: ["simple"],
+        emphasis: "Recovery",
+        duration: 60,
+        goals: ["stress", "specialised", "beginner"],
+        tagline: "Slow down, soften, return to yourself.",
+        glance: { pace: "Slow", heat: "Room temp", forWho: "All levels" },
+        desc: "A deeply restorative practice for anyone seeking gentle movement, mindful support, and space to replenish depleted energy. Using props, personalised assistance, and slow sequencing, this class brings your body into a state where recovery naturally unfolds.",
+        forWho:
+          "Anyone navigating injury, fatigue, or stiffness. Older adults, beginners, or regular practitioners wanting a softer complement.",
+        benefits:
+          "Releases deep tension, supports nervous-system regulation, reduces stress, and improves sleep.",
+      },
+      {
+        id: "dance-flow",
+        name: "Dance Flow",
+        isNew: true,
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Pulse_yoga.jpg?v=1771176982",
+        levels: ["moderate"],
+        emphasis: "Movement",
+        duration: 60,
+        goals: ["cardio", "strength"],
+        tagline: "Rhythm-led. Dance-inflected. Movement that feels alive.",
+        glance: { pace: "Rhythmic", heat: "Room temp", forWho: "Intermediate" },
+        desc: "Weaves yoga and expressive movement into a seamless, energising flow. Grounded sequences unfold alongside music-driven transitions. Music guides the pace, supporting momentum without strain. The class closes with guided relaxation. Led by our newest teacher, Dida.",
+        forWho:
+          "Practitioners with a foundational practice who enjoy music-led movement.",
+        benefits:
+          "Supports coordination, mobility, and whole-body strength. Releases stored tension. Uplifts mood and energy.",
+      },
+      {
+        id: "ashtanga-2",
+        name: "Ashtanga 2",
+        isNew: true,
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/asthanga-2_up.png?v=1776351005",
+        levels: ["challenging"],
+        emphasis: "Mastery & Precision",
+        duration: 75,
+        goals: ["strength", "cardio"],
+        tagline:
+          "For the advanced practitioner. Complex sequences, extended holds, heightened breath control.",
+        glance: { pace: "Dynamic", heat: "Room temp", forWho: "Advanced" },
+        desc: "Builds on Ashtanga-Style with advanced variations, greater emphasis on drishti, refined bandha engagement, and intense ujjayi breathing — creating a dynamic, transformative experience. Encourages you to explore physical and mental boundaries.",
+        forWho:
+          "Experienced, consistent practitioners who want to refine their practice and explore advanced postures with precision.",
+        benefits:
+          "Activates the parasympathetic nervous system. Enhances strength, balance, flexibility. Sharpens mental focus.",
+      },
+      {
+        id: "hatha-classic-2",
+        name: "Hatha Classic 2",
+        isNew: true,
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Hatha_classic-2_up.png?v=1776351005",
+        levels: ["challenging"],
+        emphasis: "Strength & Stability",
+        duration: 75,
+        goals: ["strength", "flexibility"],
+        tagline: "Intricate asanas. Longer holds. Refined breathwork.",
+        glance: { pace: "Deliberate", heat: "Room temp", forWho: "Advanced" },
+        desc: "Builds on Hatha Classic. An elevated experience for seasoned practitioners — more intricate traditional asanas, longer holds, refined breathwork. A harmonious blend of advanced poses and counterposes, guided by deliberate breathing and introspection.",
+        forWho:
+          "Experienced practitioners with a consistent practice who want to explore deeper energetic work.",
+        benefits:
+          "Strengthens the body, sharpens focus, enhances endurance. Purifies mind and body, fosters a grounded connection.",
+      },
+      {
+        id: "core",
+        name: "Core",
+        isNew: true,
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/core-up.png?v=1776350310",
+        levels: ["challenging"],
+        emphasis: "Movement",
+        duration: 60,
+        goals: ["strength"],
+        tagline:
+          "Build a strong, stable centre. Pilates-like focus, without the machines.",
+        glance: { pace: "Intense", heat: "Room temp", forWho: "All levels" },
+        desc: "Engages your abdominal muscles with core-focused asanas. Challenges your pelvis, lower back, hips, and stomach — training these muscles to work in harmony for better balance and stability. Combines asana and pranayama.",
+        forWho:
+          "All levels who want to work on core strength and build a strong physical foundation.",
+        benefits:
+          "Alleviates back pain, improves posture, while delivering all the benefits of classic yoga practice.",
+      },
+      {
+        id: "warm-ashtanga",
+        name: "Warm Ashtanga",
+        isNew: true,
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Warm_astanga.jpg?v=1771176982",
+        levels: ["challenging"],
+        emphasis: "Movement",
+        duration: 75,
+        temp: "30-32°C",
+        goals: ["strength", "cardio"],
+        tagline: "The traditional Ashtanga sequence — in controlled warmth.",
+        glance: { pace: "Dynamic", heat: "Warm (30-32°C)", forWho: "Advanced" },
+        desc: "The steady heat supports deeper muscular engagement while allowing the body to open gradually and safely. Reinforces foundations — drishti, half flow, bandha, strong ujjayi breathing. The warmth enhances circulation, promotes flexibility, and intensifies the physical experience.",
+        forWho:
+          "Consistent practitioners looking to deepen Ashtanga and explore strength and endurance in new conditions.",
+        benefits:
+          "Muscular release, improved circulation, detoxification through sweat. Increases flexibility, strength, balance.",
+      },
+      {
+        id: "sculpt-2",
+        name: "Sculpt 2",
+        isNew: true,
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/sculpt-2_up.png?v=1776349956",
+        levels: ["challenging"],
+        emphasis: "Movement",
+        duration: 60,
+        goals: ["strength", "cardio"],
+        tagline: "Sculpt, leveled up. Heavier weights. Deeper intensity.",
+        glance: { pace: "Intense", heat: "Room temp", forWho: "Advanced" },
+        desc: "A level higher than Sculpt. Fuses Hatha, Vinyasa, and Ashtanga asanas with heavier wrist and ankle weights (4 kgs across arms and legs) for deeper muscle engagement. More strain, sharper balance, more sweat — with yogic grace. Features active breathwork.",
+        forWho:
+          "Sculpt practitioners and fitness enthusiasts seeking heavier weights and advanced breathwork.",
+        benefits:
+          "Muscle toning, increased bone density, stronger joints, enhanced core, brain and heart support.",
+      },
+
+      // ---------- POPULAR ----------
+      {
+        id: "hatha-basic",
+        name: "Hatha Basic",
+        isPopular: true,
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Hatha_Basic_f0b57e6e-9e81-4886-beda-24f98e1da30b.jpg?v=1769686456",
+        levels: ["simple"],
+        emphasis: "Grounding",
+        duration: 60,
+        goals: ["beginner"],
+        tagline: "The foundation your long-term practice will rest on.",
+        glance: { pace: "Gentle", heat: "Room temp", forWho: "Beginner" },
+        desc: "Balances sun and moon energies in your body. With a focus on aligning the left and right channels — the nadis — we modify traditional poses while bringing awareness to your breath. A foundation practice that lends itself to everything you'll do later.",
+        forWho: "Perfect for those new to the practice.",
+        benefits:
+          "Overall flexibility, mobility, and alignment. Builds a strong base.",
+      },
+      {
+        id: "vinyasa",
+        name: "Vinyasa",
+        isPopular: true,
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Vinyasa_96eab5c0-c7fa-43bc-bd4f-d4581eb189c0.jpg?v=1770025659",
+        levels: ["moderate"],
+        emphasis: "Movement",
+        duration: 60,
+        goals: ["cardio", "flexibility"],
+        tagline: "Rhythmic, flowing, breath-led. Arranged in a special way.",
+        glance: { pace: "Flowing", heat: "Room temp", forWho: "Intermediate" },
+        desc: "Vinyasa requires continuous movement between poses in alignment with your breath. Inhalations connect to upward movements, exhalations to downward motions or twists. The deeper your connection to breath, the better this practice becomes.",
+        forWho:
+          "Those who have mastered the foundations and can connect asanas with their breath.",
+        benefits:
+          "Stability, flexibility, relaxed mind, consistent sleep, cardiovascular health.",
+      },
+      {
+        id: "power",
+        name: "Power",
+        isPopular: true,
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Power_f6bcd078-9bc8-4fae-8a96-d1aa1a4e2d6f.jpg?v=1769686447",
+        levels: ["moderate"],
+        emphasis: "Movement",
+        duration: 60,
+        goals: ["strength", "cardio"],
+        tagline:
+          "A gym workout without weights — but with a whole lot of energy.",
+        glance: { pace: "Fast", heat: "Room temp", forWho: "Intermediate" },
+        desc: "Led at a fast pace where you activate every muscle, cell, and tissue. Dynamic, free-flowing sessions that engage ujjayi breathing. You'll leave energised and clear.",
+        forWho:
+          "If you enjoy fast-paced exercise and have moderate strength and endurance, you'll love this.",
+        benefits:
+          "Full-body strength, endurance, stamina. Core engagement. A calorie-burner with deeper yoga benefits.",
+      },
+      {
+        id: "sculpt",
+        name: "Sculpt",
+        isPopular: true,
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Sculpt_57ddadb6-0be1-4033-967b-b78722d5dc5f.jpg?v=1769686446",
+        levels: ["moderate"],
+        emphasis: "Movement",
+        duration: 60,
+        goals: ["strength", "cardio"],
+        tagline: "Weighted asanas. Hatha, Vinyasa, Ashtanga — fused together.",
+        glance: { pace: "Dynamic", heat: "Room temp", forWho: "Intermediate" },
+        desc: "A unique style developed by our team. We strap weights around wrists and ankles to tone the body — emphasis on arm, core, and leg strength. The weights naturally heighten balance and stability. An energising practice that kicks off your day.",
+        forWho: "Fast-paced exercisers with moderate strength and endurance.",
+        benefits:
+          "Awakens every muscle. Heart pumps faster. Tones appearance, strengthens joints, increases bone density.",
+      },
+      {
+        id: "yog-nidra",
+        name: "Yog Nidra",
+        isPopular: true,
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Yog_Nidra_fd9a41e2-589b-4d9a-a149-16e9bdb857ac.jpg?v=1769686456",
+        levels: ["simple"],
+        emphasis: "Balance",
+        duration: 60,
+        goals: ["stress", "beginner"],
+        tagline: "Deep relaxation with complete awareness. Blissful.",
+        glance: { pace: "Still", heat: "Room temp", forWho: "Everyone" },
+        desc: "Guided relaxation during which our teachers bring awareness to different parts of your body. Employs the first step of meditation — kayotsarga, relaxation with self-awareness. One practice can offer immense joy.",
+        forWho:
+          "Everyone. We encourage you to try this for its calming, surprisingly joyful effects.",
+        benefits:
+          "Improved sleep, released stress, calmer mind. Puts the parasympathetic nervous system into deeper rest.",
+      },
+      {
+        id: "warm-stretch",
+        name: "Warm Stretch",
+        isPopular: true,
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Warm_Stretch.jpg?v=1769686456",
+        levels: ["simple", "moderate"],
+        emphasis: "Release",
+        duration: 60,
+        temp: "32°C",
+        goals: ["flexibility", "stress", "beginner"],
+        tagline: "Think lengthen, elongate, pliable, supple.",
+        glance: { pace: "Gentle", heat: "Warm (32°C)", forWho: "All levels" },
+        desc: "We raise the room to around 32°C and guide you through poses that stretch muscles you didn't even know existed. We pause with every pose, bringing awareness to different parts of your body. In this warmth, flexibility arrives faster.",
+        forWho:
+          "Both beginners and experienced practitioners, particularly those wanting to work on flexibility.",
+        benefits:
+          "Detoxification through sweat, improved flexibility, better-functioning internal organs.",
+      },
+
+      // ---------- OTHERS ----------
+      {
+        id: "iyengar-style",
+        name: "Iyengar-style",
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Iyengar-style.jpg?v=1769686455",
+        levels: ["simple"],
+        emphasis: "Release",
+        duration: 75,
+        goals: ["flexibility", "specialised"],
+        tagline: "Precision, held longer. Props as teachers.",
+        glance: { pace: "Deliberate", heat: "Room temp", forWho: "All levels" },
+        desc: "A deeply therapeutic session where the emphasis is precise alignment through props — wheels, blocks, straps. Props make you more adaptable to challenging poses, letting you hold them longer. They help teachers tailor every asana to your body.",
+        forWho:
+          "Those deeply immersed in their practice who want to refine alignment.",
+        benefits:
+          "Improved confidence, mindfulness, cognitive function. Strength and flexibility through supported work.",
+      },
+      {
+        id: "yin-yang",
+        name: "Yin Yang",
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Yin_Yang.jpg?v=1769686456",
+        levels: ["simple"],
+        emphasis: "Release",
+        duration: 60,
+        goals: ["flexibility", "stress"],
+        tagline: "Stillness in movement. Movement in stillness.",
+        glance: { pace: "Balanced", heat: "Room temp", forWho: "All levels" },
+        desc: "Begins with a dynamic Yang practice that unknots the body — then settles into a cool, passive Yin practice where asanas are held longer. A session that brings two opposing energies in your body to balance.",
+        forWho:
+          "Ideal for those who want to balance intense workouts with something softer.",
+        benefits:
+          "Allows prana to flow through Yang while Yin seeps into deep connective tissues.",
+      },
+      {
+        id: "yoga-relay",
+        name: "Yoga Relay",
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Yoga_relay.png?v=1769687855",
+        levels: ["simple", "moderate"],
+        emphasis: "Specialised",
+        duration: 90,
+        goals: ["beginner", "specialised"],
+        tagline:
+          "A yoga triathlon. 90 minutes. Multiple styles. Multiple teachers.",
+        glance: { pace: "Varied", heat: "Mixed", forWho: "All levels" },
+        desc: "Conceptualised by our team. In 90 minutes we'll take you on a journey through several types of yoga with several teachers — stretch, sweat, tap into inner peace, all in one dynamic session. The fastest way to get a real sense of Lifeyoga.",
+        forWho:
+          "Anyone who wants to shake up their practice, and first-timers deciding what to commit to.",
+        benefits:
+          "Works your overall flexibility, mobility, alignment, and stress management.",
+      },
+      {
+        id: "hatha-classic",
+        name: "Hatha Classic",
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Hatha_Classic_7f0d85e8-ea72-42f9-a63e-acda0a108eae.jpg?v=1769686456",
+        levels: ["simple", "moderate"],
+        emphasis: "Grounding",
+        duration: 75,
+        goals: ["beginner"],
+        tagline: "A stepping stone to something more rooted.",
+        glance: { pace: "Deliberate", heat: "Room temp", forWho: "Beginner+" },
+        desc: "A catalyst to awaken and balance the energies in our body. Requires focus as you practise traditional yoga asanas, hold them longer, and observe the effects of each pose. A concoction of poses and counterposes preceded by warm-up.",
+        forWho:
+          "Those with some foundation who want to deepen without yet moving to high-intensity flows.",
+        benefits:
+          "Channelises breath and shifts you to a state of physical, mental, and emotional balance.",
+      },
+      {
+        id: "vinyasa-basic",
+        name: "Vinyasa Basic",
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Vinyasa_Basic.jpg?v=1769686455",
+        levels: ["simple"],
+        emphasis: "Grounding",
+        duration: 60,
+        goals: ["beginner", "cardio"],
+        tagline:
+          "Sync breath with movement. Feel the mind-body connection deepen.",
+        glance: { pace: "Flowing", heat: "Room temp", forWho: "Beginner" },
+        desc: "This spirited session is about syncing breath with movements to reach deeper mind-body connection. As you progress, you'll immerse deeper into each pose. Prepares you for a more immersive Vinyasa practice.",
+        forWho:
+          "Those ready to challenge themselves and strengthen their grasp on foundational poses.",
+        benefits:
+          "Builds muscular strength while boosting the cardiovascular system.",
+      },
+      {
+        id: "prenatal",
+        name: "Prenatal",
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Prenatal_1bc4cf9f-e617-476b-a7cd-b3539e5e6c24.jpg?v=1769686456",
+        levels: ["simple"],
+        emphasis: "Specialised",
+        duration: 60,
+        goals: ["specialised"],
+        tagline: "Stay supple. Prepare your body — and breath — for birth.",
+        glance: { pace: "Gentle", heat: "Room temp", forWho: "Expecting moms" },
+        desc: "Designed for pregnant women across all three trimesters. Keeps your body supple while gently preparing you for birthing. Flows through a simple progression of asanas, pranayama, yoga nidra, and mantra recitations. Please consult your doctor before joining.",
+        forWho:
+          "Pregnant women, beginners or seasoned. All trimesters welcome.",
+        benefits:
+          "Regular sleep cycle, eased lower-back pain, better digestion. Helps ease mood swings.",
+      },
+      {
+        id: "kids-yoga",
+        name: "Kids Yoga",
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Kids_Yoga_2014d3c3-4717-4f28-ba99-677722bcc71e.jpg?v=1769686456",
+        levels: ["simple"],
+        emphasis: "Specialised",
+        duration: 60,
+        goals: ["specialised"],
+        tagline: "Creativity and movement. Storytelling meets asana.",
+        glance: { pace: "Playful", heat: "Room temp", forWho: "Ages 6–13" },
+        desc: "Asanas, pranayama, and relaxation led through storytelling — making the 60 minutes a study in creativity and joy. A foundation practice to introduce children to yoga as part of their everyday world.",
+        forWho:
+          "Children aged 6–13. Whether new to yoga or with some foundation.",
+        benefits:
+          "Encourages imagination, strengthens growing bodies, introduces stillness through simple meditation.",
+      },
+      {
+        id: "hatha-detox",
+        name: "Hatha Detox",
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Hatha_Detox_0b0aefc5-a388-4515-adcb-a3532bda22d3.jpg?v=1769686447",
+        levels: ["moderate"],
+        emphasis: "Release",
+        duration: 60,
+        goals: ["flexibility", "stress"],
+        tagline: "Twists and bends. Cleansing breathwork. A full-body release.",
+        glance: { pace: "Moderate", heat: "Room temp", forWho: "Intermediate" },
+        desc: "Emphasis on twists and bends to stimulate your organs — particularly the ones that extract toxins. Kapalabhati breathing is incorporated to enhance kidney and liver function. As your body detoxifies, so does your mind.",
+        forWho:
+          "Those who want to detox the body through traditional postures and cleansing breathwork.",
+        benefits:
+          "Purifies blood, activates digestive fire, strengthens excretory organs.",
+      },
+      {
+        id: "aerial-yoga",
+        name: "Aerial Yoga",
+        members: true,
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Aerial_Yoga_35f09b51-034f-4a6a-8c88-5d2f79b99ba5.jpg?v=1769686447",
+        levels: ["moderate"],
+        emphasis: "Movement",
+        duration: 60,
+        goals: ["specialised", "strength"],
+        tagline:
+          "Hanging in air. Cocooned in silk. Your body opens differently.",
+        glance: { pace: "Dynamic", heat: "Room temp", forWho: "Members only" },
+        desc: "Combines traditional asanas with aerial arts. You'll either be fully supported by silks or wrap them around particular body parts — half on the ground, half off. Suspending yourself opens your body more intuitively than when you're on the floor.",
+        forWho:
+          "Those who want to switch up their practice, enjoy a new form of movement, or decompress their joints.",
+        benefits:
+          "Improved flexibility, stability, balance. More traction, joint decompression. Better mental health.",
+      },
+      {
+        id: "yin",
+        name: "Yin",
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Yin_7dee5a90-0ecd-4c5d-84de-f8a0ec9a756a.jpg?v=1769686446",
+        levels: ["moderate"],
+        emphasis: "Release",
+        duration: 60,
+        goals: ["flexibility", "stress"],
+        tagline: "Body meditation. Asanas held for three to five minutes.",
+        glance: { pace: "Slow", heat: "Room temp", forWho: "All levels" },
+        desc: "Deeply restorative. Props ease you into every pose or help you hold longer. Yin is about finding stillness in body and mind, and literally breathing deeper into poses. Seeps into fascia, ligaments, joints, bones.",
+        forWho:
+          "Those with a sense of basic practice. Also an effective way to round off a hectic day.",
+        benefits:
+          "Strengthens connective tissue, releases stiffness, expels everyday stress and anxiety.",
+      },
+      {
+        id: "ashtanga-style",
+        name: "Ashtanga-Style",
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Ashtanga-style_ade38854-548e-4f16-bedb-e099b63e847b.jpg?v=1769686447",
+        levels: ["moderate"],
+        emphasis: "Movement",
+        duration: 75,
+        goals: ["strength", "cardio"],
+        tagline:
+          "A fixed sequence, practised consistently. The traditional path.",
+        glance: { pace: "Dynamic", heat: "Room temp", forWho: "Intermediate" },
+        desc: "Follows an unchanging sequence. Introduces drishti, half flow, bandha, and intense ujjayi breathing. Known for its uplifting effects and for encouraging practitioners to push beyond their limits.",
+        forWho:
+          "Consistent practitioners who want to challenge themselves and go deeper.",
+        benefits:
+          "Activates the parasympathetic nervous system. Increases flexibility and balance while stimulating internal organs.",
+      },
+      {
+        id: "hot-basic",
+        name: "Hot Basic",
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Hot_Basic_239e40c4-83c6-4a0f-ae00-b277c87e9631.jpg?v=1769686447",
+        levels: ["moderate"],
+        emphasis: "Release",
+        duration: 60,
+        temp: "35-40°C",
+        goals: ["cardio", "flexibility"],
+        tagline:
+          "Intense, never suffocating. Between 35 and 40°C with humidity.",
+        glance: {
+          pace: "Moderate",
+          heat: "Hot (35-40°C)",
+          forWho: "Intermediate",
+        },
+        desc: "Expect to really sweat. You'll go deeper into stretches as you work with your breath. Our central air filtration offers constant ventilation — you'll continue breathing fresh air throughout.",
+        forWho:
+          "Those who've mastered basic practice. Hydrate well before, during, and after.",
+        benefits:
+          "Heat gets into soft tissue. A more relaxed body in less time. Improved flexibility and circulation.",
+      },
+      {
+        id: "meditation-pranayama",
+        name: "Meditation & Pranayama",
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Meditation_Pranayama.png?v=1776351570",
+        levels: ["moderate"],
+        emphasis: "Balance",
+        duration: 60,
+        goals: ["stress", "specialised"],
+        tagline: "Come meet your inner self.",
+        glance: { pace: "Still", heat: "Room temp", forWho: "Intermediate" },
+        desc: "Brings awareness and eventually stillness to your thoughts and breath. With dharana, you'll bring calm and quiet to your being. You'll emerge with a gleaming mind.",
+        forWho:
+          "Those with practical knowledge of pranayama. Some breathing exercises are intensive.",
+        benefits:
+          "Increases focus and concentration. Helps manage stress and anxiety. Builds self-awareness.",
+      },
+      {
+        id: "wall-rope",
+        name: "Wall-rope",
+        img: "https://cdn.shopify.com/s/files/1/0743/5341/0361/files/Wall-rope_6f525172-49aa-4164-82a6-6744073a4157.jpg?v=1769686447",
+        levels: ["moderate"],
+        emphasis: "Release",
+        duration: 60,
+        goals: ["flexibility", "specialised"],
+        tagline: "Ropes attached to the walls. Deep stretches. Longer holds.",
+        glance: {
+          pace: "Deliberate",
+          heat: "Room temp",
+          forWho: "Intermediate",
+        },
+        desc: "Immensely therapeutic. Ropes attached to hooks along our studio walls support deep stretches, inversions, and longer holds — tapping into flexibility floor work can't reach.",
+        forWho:
+          "Those with a good hold on basic practice who want to build endurance and release emotional tension.",
+        benefits:
+          "Improves flexibility, better alignment, relieves leg and foot cramps.",
+      },
+    ];
+
+    // =========================================================
+    // STATE
+    // =========================================================
+    var state = { sort: "all", goal: "all", level: "all" };
+
+    // =========================================================
+    // HELPERS
+    // =========================================================
+    function levelLabel(l) {
+      return l.charAt(0).toUpperCase() + l.slice(1);
+    }
+    function highestLevel(levels) {
+      if (levels.indexOf("challenging") !== -1) return "challenging";
+      if (levels.indexOf("moderate") !== -1) return "moderate";
+      return "simple";
+    }
+    function levelDots(level) {
+      var n = level === "challenging" ? 3 : level === "moderate" ? 2 : 1;
+      var d = '<span class="ly-dots">';
+      for (var i = 1; i <= 3; i++)
+        d += '<span class="' + (i <= n ? "is-on" : "") + '"></span>';
+      return d + "</span>";
+    }
+
+    // Deterministic mock sessions per class (until real schedule API wired up)
+    function mockNextSessions(id) {
+      var teachers = [
+        "Priya Mehta",
+        "Rohan Shah",
+        "Anjali Iyer",
+        "Dida Roy",
+        "Kabir Nair",
+        "Meera Joshi",
+      ];
+      var times = ["6:30 AM", "9:00 AM", "12:30 PM", "6:00 PM", "7:30 PM"];
+      var days = ["Tomorrow", "Wed", "Thu", "Fri", "Sat"];
+      var seed = 0;
+      for (var i = 0; i < id.length; i++) seed += id.charCodeAt(i);
+      function pick(arr, o) {
+        return arr[(seed + o) % arr.length];
+      }
+      return [
+        {
+          day: pick(days, 0),
+          time: pick(times, 1),
+          teacher: pick(teachers, 2),
+        },
+        {
+          day: pick(days, 3),
+          time: pick(times, 4),
+          teacher: pick(teachers, 5),
+        },
+        {
+          day: pick(days, 6),
+          time: pick(times, 7),
+          teacher: pick(teachers, 8),
+        },
+      ];
+    }
+
+    // =========================================================
+    // RENDER
+    // =========================================================
+    var grid = document.getElementById("lyGrid");
+    var countEl = document.getElementById("lyCount");
+    var clearGoalBtn = document.getElementById("lyClearGoal");
+    var clearLevelBtn = document.getElementById("lyClearLevel");
+    var resetAllBtn = document.getElementById("lyResetAll");
+
+    function renderGrid() {
+      var filtered = classes.filter(function (c) {
+        var okSort =
+          state.sort === "all" ||
+          (state.sort === "popular" && c.isPopular) ||
+          (state.sort === "new" && c.isNew);
+        var okGoal =
+          state.goal === "all" ||
+          (c.goals && c.goals.indexOf(state.goal) !== -1);
+        var okLevel =
+          state.level === "all" || c.levels.indexOf(state.level) !== -1;
+        return okSort && okGoal && okLevel;
+      });
+
+      countEl.innerHTML =
+        "<strong>" +
+        filtered.length +
+        "</strong> " +
+        (filtered.length === 1 ? "class" : "classes") +
+        (state.sort !== "all" ? " in " + state.sort : "") +
+        (state.goal !== "all" || state.level !== "all"
+          ? " matching your filters"
+          : "");
+
+      // Toggle clear button states
+      clearGoalBtn.disabled = state.goal === "all";
+      clearLevelBtn.disabled = state.level === "all";
+      resetAllBtn.disabled =
+        state.sort === "all" && state.goal === "all" && state.level === "all";
+
+      if (!filtered.length) {
+        grid.innerHTML =
+          '<div class="ly-no-results"><h4>No classes match this combination.</h4><p>Try widening your filters — or see all classes.</p></div>';
+        return;
+      }
+
+      var html = "";
+      filtered.forEach(function (c) {
+        var primary = highestLevel(c.levels);
+        var next = mockNextSessions(c.id)[0];
+        var badges = "";
+        if (c.isNew) badges += '<span class="ly-badge ly-badge-new">New</span>';
+        if (c.isPopular)
+          badges += '<span class="ly-badge ly-badge-popular">Popular</span>';
+        if (c.members)
+          badges += '<span class="ly-badge ly-badge-members">Members</span>';
+
+        html +=
+          '<button class="ly-card" data-id="' +
+          c.id +
+          '" type="button">' +
+          '<div class="ly-card-media">' +
+          '<img src="' +
+          c.img +
+          '" alt="' +
+          c.name +
+          '" loading="lazy">' +
+          (badges ? '<div class="ly-card-badges">' + badges + "</div>" : "") +
+          "</div>" +
+          '<div class="ly-card-body">' +
+          "<h3>" +
+          c.name +
+          "</h3>" +
+          '<div class="ly-card-meta">' +
+          levelDots(primary) +
+          "<span>" +
+          c.duration +
+          " min</span>" +
+          "<span>" +
+          c.emphasis +
+          "</span>" +
+          (c.temp ? "<span>" + c.temp + "</span>" : "") +
+          "</div>" +
+          '<p class="ly-card-desc">' +
+          c.tagline +
+          "</p>" +
+          '<div class="ly-card-foot">' +
+          '<span class="ly-card-link">View & book →</span>' +
+          '<div class="ly-card-next">Next<strong>' +
+          next.day +
+          " · " +
+          next.time +
+          "</strong></div>" +
+          "</div>" +
+          "</div>" +
+          "</button>";
+      });
+      grid.innerHTML = html;
+
+      Array.prototype.forEach.call(
+        grid.querySelectorAll(".ly-card"),
+        function (card) {
+          card.addEventListener("click", function () {
+            openModal(card.getAttribute("data-id"));
+          });
+        },
+      );
+    }
+
+    // =========================================================
+    // FILTERS
+    // =========================================================
+    function wireChips(containerId, stateKey, attr) {
+      var container = document.getElementById(containerId);
+      container.addEventListener("click", function (e) {
+        var btn = e.target.closest(".ly-chip");
+        if (!btn) return;
+        state[stateKey] = btn.getAttribute(attr);
+        Array.prototype.forEach.call(
+          container.querySelectorAll(".ly-chip"),
+          function (c) {
+            c.classList.remove("is-active");
+          },
+        );
+        btn.classList.add("is-active");
+        renderGrid();
+      });
+    }
+    wireChips("lyGoals", "goal", "data-goal");
+    wireChips("lyLevels", "level", "data-level");
+
+    // Sort tabs
+    document.getElementById("lyTabs").addEventListener("click", function (e) {
+      var btn = e.target.closest(".ly-tab");
+      if (!btn) return;
+      state.sort = btn.getAttribute("data-sort");
+      Array.prototype.forEach.call(
+        this.querySelectorAll(".ly-tab"),
+        function (t) {
+          t.classList.remove("is-active");
+        },
+      );
+      btn.classList.add("is-active");
+      renderGrid();
+    });
+
+    // Clear buttons
+    function setActive(containerId, value) {
+      Array.prototype.forEach.call(
+        document.getElementById(containerId).querySelectorAll(".ly-chip"),
+        function (c) {
+          c.classList.toggle(
+            "is-active",
+            c.getAttribute("data-goal") === value ||
+              c.getAttribute("data-level") === value,
+          );
+        },
+      );
+    }
+    clearGoalBtn.addEventListener("click", function () {
+      if (this.disabled) return;
+      state.goal = "all";
+      setActive("lyGoals", "all");
+      renderGrid();
+    });
+    clearLevelBtn.addEventListener("click", function () {
+      if (this.disabled) return;
+      state.level = "all";
+      setActive("lyLevels", "all");
+      renderGrid();
+    });
+    resetAllBtn.addEventListener("click", function () {
+      if (this.disabled) return;
+      state = { sort: "all", goal: "all", level: "all" };
+      Array.prototype.forEach.call(
+        document.getElementById("lyTabs").querySelectorAll(".ly-tab"),
+        function (t) {
+          t.classList.toggle(
+            "is-active",
+            t.getAttribute("data-sort") === "all",
+          );
+        },
+      );
+      setActive("lyGoals", "all");
+      setActive("lyLevels", "all");
+      renderGrid();
+    });
+
+    // =========================================================
+    // MODAL
+    // =========================================================
+    var modal = document.getElementById("lyModal");
+    var closeBtn = document.getElementById("lyModalClose");
+
+    function openModal(id) {
+      var c = classes.filter(function (x) {
+        return x.id === id;
+      })[0];
+      if (!c) return;
+      var primary = highestLevel(c.levels);
+
+      // Hero
+      document.getElementById("lyMImg").src = c.img;
+      document.getElementById("lyMImg").alt = c.name;
+      document.getElementById("lyMEyebrow").textContent =
+        levelLabel(primary) + " · " + c.emphasis + " · " + c.duration + " min";
+      document.getElementById("lyMTitle").textContent = c.name;
+
+      // Badges over image
+      var badges = "";
+      if (c.isNew) badges += '<span class="ly-badge ly-badge-new">New</span>';
+      if (c.isPopular)
+        badges += '<span class="ly-badge ly-badge-popular">Popular</span>';
+      if (c.members)
+        badges += '<span class="ly-badge ly-badge-members">Members only</span>';
+      document.getElementById("lyMBadges").innerHTML = badges;
+
+      document.getElementById("lyMTagline").textContent = c.tagline;
+
+      // At a glance
+      var g = c.glance || {};
+      document.getElementById("lyMGlance").innerHTML =
+        '<div class="ly-glance-cell">' +
+        '<div class="ly-glance-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>' +
+        '<div class="ly-glance-label">Pace</div>' +
+        '<div class="ly-glance-value">' +
+        (g.pace || "—") +
+        "</div>" +
+        "</div>" +
+        '<div class="ly-glance-cell">' +
+        '<div class="ly-glance-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg></div>' +
+        '<div class="ly-glance-label">Room</div>' +
+        '<div class="ly-glance-value">' +
+        (g.heat || c.temp || "Room temp") +
+        "</div>" +
+        "</div>" +
+        '<div class="ly-glance-cell">' +
+        '<div class="ly-glance-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>' +
+        '<div class="ly-glance-label">For</div>' +
+        '<div class="ly-glance-value">' +
+        (g.forWho || "All levels") +
+        "</div>" +
+        "</div>";
+
+      // Description + info
+      document.getElementById("lyMCopy").innerHTML = "<p>" + c.desc + "</p>";
+      document.getElementById("lyMFor").textContent = c.forWho;
+      document.getElementById("lyMBenefits").textContent = c.benefits;
+
+      // Members
+      document.getElementById("lyMMembers").innerHTML = c.members
+        ? '<div class="ly-members-note"><strong>Members-only class.</strong> Aerial Yoga is reserved for Lifeyoga members — not available as a free trial or drop-in.</div>'
+        : "";
+
+      // Sessions
+      var sessions = mockNextSessions(c.id);
+      var sessionsHTML =
+        '<div class="ly-sessions-head"><strong>Next available</strong><a href="/pages/daily-schedule?class=' +
+        c.id +
+        '">View full week →</a></div>';
+      sessions.forEach(function (s) {
+        sessionsHTML +=
+          '<div class="ly-session">' +
+          "<time>" +
+          s.time +
+          "<span>" +
+          s.day +
+          "</span></time>" +
+          '<div class="ly-session-teacher">with <strong>' +
+          s.teacher +
+          "</strong></div>" +
+          '<a class="ly-session-book" href="/pages/daily-schedule?class=' +
+          c.id +
+          '">Book</a>' +
+          "</div>";
+      });
+      document.getElementById("lyMSessions").innerHTML = sessionsHTML;
+
+      // Footer CTA
+      var footer = document.getElementById("lyMFooter");
+      if (c.members) {
+        footer.setAttribute("data-single", "true");
+        footer.innerHTML =
+          '<div class="ly-modal-footer-info">Available to<strong>Lifeyoga members</strong></div>' +
+          '<a href="/pages/memberships" class="ly-btn ly-btn-primary">Become a member <span class="ly-btn-arrow">→</span></a>';
+      } else {
+        footer.removeAttribute("data-single");
+        footer.innerHTML =
+          '<div class="ly-modal-footer-info">First class<strong>Free trial</strong></div>' +
+          '<a href="/pages/daily-schedule?class=' +
+          c.id +
+          '" class="ly-btn ly-btn-primary">Book this class <span class="ly-btn-arrow">→</span></a>';
+      }
+
+      // Reset scroll
+      document.querySelector(".ly-modal-body").scrollTop = 0;
+
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("ly-modal-open");
+    }
+
+    function closeModal() {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("ly-modal-open");
+    }
+
+    closeBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", function (e) {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && modal.classList.contains("is-open"))
+        closeModal();
+    });
+
+    // =========================================================
+    // FAQ
+    // =========================================================
+    Array.prototype.forEach.call(
+      document.querySelectorAll(".ly-faq-item"),
+      function (item) {
+        item.querySelector(".ly-faq-q").addEventListener("click", function () {
+          item.classList.toggle("is-open");
+        });
+      },
+    );
+
+    // Initial render
+    renderGrid();
+  })();
+</script>
